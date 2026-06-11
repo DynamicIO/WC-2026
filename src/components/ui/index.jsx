@@ -23,14 +23,14 @@ export function Badge({ children, color = 'var(--color-gold)', bg = 'rgba(201,16
 
 export function SectionHeader({ kicker, title, right }) {
   return (
-    <div className="flex items-end justify-between gap-4 mb-5">
-      <div>
+    <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2 mb-5">
+      <div className="min-w-0">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">{kicker}</p>
         <h2 className="font-display text-3xl md:text-4xl font-bold uppercase tracking-wide leading-none mt-1">
           {title}
         </h2>
       </div>
-      {right && <div className="shrink-0">{right}</div>}
+      {right && <div className="shrink-0 max-w-full">{right}</div>}
     </div>
   )
 }

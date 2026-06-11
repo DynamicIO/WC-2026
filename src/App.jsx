@@ -69,7 +69,7 @@ function AppInner() {
         favSlot={<FavTeamTrigger fav={fav} onOpen={() => setFavModalOpen(true)} />}
       />
 
-      <main className="space-y-14 pb-24 lg:pb-20">
+      <main className="space-y-10 sm:space-y-14 pb-10 lg:pb-16 overflow-x-clip">
         {/* 1 ─ Hero: live match carousel */}
         <ErrorBoundary label="Match carousel">
           <MatchCarousel />
@@ -130,7 +130,7 @@ function AppInner() {
         </ErrorBoundary>
       </main>
 
-      <footer className="border-t border-white/5 bg-bg-secondary">
+      <footer className="border-t border-white/5 bg-bg-secondary pb-20 lg:pb-0">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-6 text-xs text-muted">
           <span className="font-display text-base font-bold uppercase tracking-wider text-ink">
             WC26 <span className="text-gold">Pulse</span>

@@ -50,10 +50,10 @@
   background-color: rgba(0,0,0,0.04) !important;
 }
 
-/* PWA install banner */
+/* PWA install banner — sits above the mobile bottom nav */
 .pwa-banner {
   position: fixed;
-  bottom: 1.25rem;
+  bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%);
   z-index: 300;
@@ -68,11 +68,22 @@
   font-size: 0.8125rem;
   font-weight: 600;
   white-space: nowrap;
+  max-width: calc(100vw - 1.5rem);
   animation: rise-in 400ms ease-out both;
+}
+
+@media (min-width: 1024px) {
+  .pwa-banner { bottom: 1.25rem; }
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Never allow stray horizontal overflow to widen the page on mobile */
+html, body {
+  overflow-x: clip;
+  max-width: 100vw;
 }
 
 body {
@@ -81,6 +92,25 @@ body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   transition: background 250ms ease, color 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iPhone notch / home-indicator support */
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Smoother momentum scrolling for horizontal scrollers on touch devices */
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+/* Comfortable touch targets on coarse pointers */
+@media (pointer: coarse) {
+  button, a {
+    touch-action: manipulation;
+  }
 }
 
 /* Card hover lift */

@@ -77,15 +77,14 @@ function Slide({ match, onViewDetail, featured }) {
   return (
     // Each slide is the same flex basis; scale transform makes the featured one pop
     <div
-      className="relative shrink-0 grow-0 min-w-0 px-2 transition-all duration-500"
+      className="relative shrink-0 grow-0 min-w-0 basis-[92%] sm:basis-[88%] px-1.5 sm:px-2 transition-all duration-500"
       style={{
-        flexBasis: '88%',
         transform: featured ? 'scale(1)' : 'scale(0.955)',
         opacity: featured ? 1 : 0.55,
       }}
     >
       <div
-        className="relative overflow-hidden rounded-2xl border px-6 py-8 md:px-12 md:py-12"
+        className="relative overflow-hidden rounded-2xl border px-4 py-6 sm:px-6 sm:py-8 md:px-12 md:py-12 text-[#F0F4FF]"
         style={{
           background: featured
             ? 'linear-gradient(135deg, #1A1608 0%, #1C1A0E 25%, #12192B 60%, #0D1117 100%)'
@@ -133,7 +132,7 @@ function Slide({ match, onViewDetail, featured }) {
         <ShareButton match={match} />
 
         {/* Badges */}
-        <div className="relative flex items-center gap-2 mb-5 flex-wrap">
+        <div className="relative flex items-center gap-2 mb-4 sm:mb-5 flex-wrap pr-10">
           <Badge>{match.stage}</Badge>
           {match.live && (
             <Badge color="var(--color-live)" bg="rgba(0,217,255,0.13)">
@@ -147,32 +146,32 @@ function Slide({ match, onViewDetail, featured }) {
         </div>
 
         {/* Main grid */}
-        <div className="relative grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+        <div className="relative grid gap-6 md:gap-8 md:grid-cols-[1fr_auto] md:items-center">
           {/* Left */}
           <div>
-            <div className="flex items-center gap-4 md:gap-8">
+            <div className="flex items-center justify-center sm:justify-start gap-5 sm:gap-4 md:gap-8">
               <div className="text-center" aria-label={match.home.name}>
-                <div className="text-5xl md:text-7xl leading-none" aria-hidden="true">{match.home.flag}</div>
-                <div className="font-display text-2xl md:text-3xl font-bold uppercase tracking-wide mt-2">{match.home.code}</div>
+                <div className="text-4xl sm:text-5xl md:text-7xl leading-none" aria-hidden="true">{match.home.flag}</div>
+                <div className="font-display text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide mt-2">{match.home.code}</div>
                 {scoreVisible && (
-                  <div className="font-display text-4xl font-black text-gold mt-1 leading-none">{match.home.score}</div>
+                  <div className="font-display text-3xl sm:text-4xl font-black text-gold mt-1 leading-none">{match.home.score}</div>
                 )}
               </div>
-              <div className="font-display text-3xl md:text-5xl font-semibold text-white/20 shrink-0" aria-hidden="true">
+              <div className="font-display text-2xl sm:text-3xl md:text-5xl font-semibold text-white/20 shrink-0" aria-hidden="true">
                 {scoreVisible ? '–' : 'VS'}
               </div>
               <div className="text-center" aria-label={match.away.name}>
-                <div className="text-5xl md:text-7xl leading-none" aria-hidden="true">{match.away.flag}</div>
-                <div className="font-display text-2xl md:text-3xl font-bold uppercase tracking-wide mt-2">{match.away.code}</div>
+                <div className="text-4xl sm:text-5xl md:text-7xl leading-none" aria-hidden="true">{match.away.flag}</div>
+                <div className="font-display text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide mt-2">{match.away.code}</div>
                 {scoreVisible && (
-                  <div className="font-display text-4xl font-black text-live mt-1 leading-none">{match.away.score}</div>
+                  <div className="font-display text-3xl sm:text-4xl font-black text-live mt-1 leading-none">{match.away.score}</div>
                 )}
               </div>
             </div>
 
-            <p className="mt-5 max-w-md text-sm md:text-base text-white/55 leading-relaxed">{match.tagline}</p>
+            <p className="mt-4 sm:mt-5 max-w-md text-sm md:text-base text-white/55 leading-relaxed line-clamp-3 sm:line-clamp-none">{match.tagline}</p>
 
-            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs md:text-sm text-white/35">
+            <div className="mt-3 sm:mt-4 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs md:text-sm text-white/35">
               {match.venue && (
                 <span className="inline-flex items-center gap-1.5">
                   <MapPin size={13} className="text-gold" aria-hidden="true" />{match.venue}
@@ -186,7 +185,7 @@ function Slide({ match, onViewDetail, featured }) {
             </div>
 
             {countdown && (
-              <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-4 py-1.5">
+              <div className="mt-3 inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-white/5 border border-white/10 px-3 sm:px-4 py-1.5">
                 <span className="text-[10px] uppercase tracking-widest text-muted font-semibold">Kicks off in</span>
                 <span className="font-display text-base font-bold text-gold">{countdown}</span>
               </div>
@@ -259,7 +258,7 @@ export default function MatchCarousel() {
     <>
       <section
         id="top"
-        className="relative mx-auto max-w-7xl pt-8 pb-2 rise-in overflow-hidden"
+        className="relative mx-auto max-w-7xl pt-5 sm:pt-8 pb-2 rise-in overflow-hidden"
         aria-label="Featured matches"
       >
         <div
@@ -284,16 +283,16 @@ export default function MatchCarousel() {
         </div>
 
         {/* Controls */}
-        <div className="mt-6 flex items-center justify-center gap-4">
+        <div className="mt-5 sm:mt-6 flex items-center justify-center gap-3 sm:gap-4 px-4">
           <button
             onClick={scrollPrev}
             aria-label="Previous match"
-            className="grid h-9 w-9 place-items-center rounded-full bg-white/5 border border-white/10 text-white/50 hover:text-ink hover:bg-white/10 transition-colors"
+            className="grid h-10 w-10 sm:h-9 sm:w-9 shrink-0 place-items-center rounded-full bg-white/5 border border-white/10 text-muted hover:text-ink hover:bg-white/10 transition-colors"
           >
             <ChevronLeft size={18} />
           </button>
 
-          <div role="tablist" aria-label="Select slide" className="flex gap-2 items-center">
+          <div role="tablist" aria-label="Select slide" className="flex gap-2 items-center flex-wrap justify-center min-w-0">
             {matches.map((m, i) => (
               <button
                 key={m.id}
@@ -302,7 +301,7 @@ export default function MatchCarousel() {
                 aria-label={`Go to slide ${i + 1}: ${m.home.code} vs ${m.away.code}`}
                 onClick={() => emblaApi?.scrollTo(i)}
                 className={`rounded-full transition-all duration-300 ${
-                  i === selected ? 'w-7 h-1.5 bg-gold' : 'w-2 h-1.5 bg-white/20 hover:bg-white/40'
+                  i === selected ? 'w-7 h-1.5 bg-gold' : 'w-2 h-1.5 bg-muted/40 hover:bg-muted/70'
                 }`}
               />
             ))}
@@ -311,14 +310,14 @@ export default function MatchCarousel() {
           <button
             onClick={scrollNext}
             aria-label="Next match"
-            className="grid h-9 w-9 place-items-center rounded-full bg-white/5 border border-white/10 text-white/50 hover:text-ink hover:bg-white/10 transition-colors"
+            className="grid h-10 w-10 sm:h-9 sm:w-9 shrink-0 place-items-center rounded-full bg-white/5 border border-white/10 text-muted hover:text-ink hover:bg-white/10 transition-colors"
           >
             <ChevronRight size={18} />
           </button>
 
           <button
             onClick={refetch}
-            className="ml-1 grid h-8 w-8 place-items-center rounded-full text-white/25 hover:text-white/60 transition-colors"
+            className="ml-1 grid h-8 w-8 shrink-0 place-items-center rounded-full text-muted/50 hover:text-muted transition-colors"
             aria-label="Refresh match data"
             title="Refresh scores"
           >

@@ -15,31 +15,31 @@ function MatchRow({ match, favTeam }) {
   const scoreVisible = match.status === 'live' || match.status === 'finished'
 
   return (
-    <div className={`flex items-center gap-3 px-4 py-3 border-b border-white/5 last:border-0 transition-colors hover:bg-white/3 ${isFav ? 'bg-gold/5' : ''}`}>
+    <div className={`flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 border-b border-white/5 last:border-0 transition-colors hover:bg-white/3 ${isFav ? 'bg-gold/5' : ''}`}>
       {/* Group badge */}
       <span className="hidden sm:inline shrink-0 w-6 text-center text-[10px] font-bold text-muted">
         {match.group}
       </span>
 
       {/* Home */}
-      <div className="flex items-center gap-1.5 w-28 sm:w-36 justify-end">
+      <div className="flex items-center gap-1.5 flex-1 min-w-0 sm:flex-none sm:w-36 justify-end">
         {isFav && match.home.code === favTeam && (
-          <span className="text-[8px] text-gold font-bold">★</span>
+          <span className="text-[8px] text-gold font-bold shrink-0">★</span>
         )}
-        <span className="text-sm font-semibold truncate">{match.home.name}</span>
+        <span className="text-[13px] sm:text-sm font-semibold truncate">{match.home.name}</span>
         <span className="text-base leading-none shrink-0">{match.home.flag}</span>
       </div>
 
       {/* Score / time */}
-      <div className="flex flex-col items-center shrink-0 w-24">
+      <div className="flex flex-col items-center shrink-0 w-16 sm:w-24">
         {scoreVisible ? (
-          <div className="font-display text-xl font-bold">
+          <div className="font-display text-lg sm:text-xl font-bold whitespace-nowrap">
             <span className="text-gold">{match.homeScore ?? '?'}</span>
             <span className="text-muted mx-1">–</span>
             <span className="text-live">{match.awayScore ?? '?'}</span>
           </div>
         ) : (
-          <span className="text-xs font-semibold text-muted">{match.time}</span>
+          <span className="text-[11px] sm:text-xs font-semibold text-muted whitespace-nowrap">{match.time}</span>
         )}
         {match.status === 'live' && (
           <span className="flex items-center gap-1 text-[10px] text-live font-bold mt-0.5">
@@ -52,11 +52,11 @@ function MatchRow({ match, favTeam }) {
       </div>
 
       {/* Away */}
-      <div className="flex items-center gap-1.5 w-28 sm:w-36">
+      <div className="flex items-center gap-1.5 flex-1 min-w-0 sm:flex-none sm:w-36">
         <span className="text-base leading-none shrink-0">{match.away.flag}</span>
-        <span className="text-sm font-semibold truncate">{match.away.name}</span>
+        <span className="text-[13px] sm:text-sm font-semibold truncate">{match.away.name}</span>
         {isFav && match.away.code === favTeam && (
-          <span className="text-[8px] text-gold font-bold">★</span>
+          <span className="text-[8px] text-gold font-bold shrink-0">★</span>
         )}
       </div>
 
@@ -167,13 +167,15 @@ export default function Schedule({ favTeam }) {
       {/* Match list */}
       <Card>
         {/* Header row */}
-        <div className="flex items-center gap-3 px-4 py-2.5 border-b border-white/8 bg-white/3">
+        <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 border-b border-white/8 bg-white/3">
           <span className="hidden sm:inline w-6" />
-          <span className="w-28 sm:w-36 text-right text-[10px] uppercase tracking-wider text-muted font-semibold">Home</span>
-          <span className="w-24 text-center text-[10px] uppercase tracking-wider text-muted font-semibold">
-            {groupFilter === 'MY' ? 'Score / Time' : DAY_FMT(activeDate)}
+          <span className="flex-1 sm:flex-none sm:w-36 text-right text-[10px] uppercase tracking-wider text-muted font-semibold">Home</span>
+          <span className="w-16 sm:w-24 text-center text-[10px] uppercase tracking-wider text-muted font-semibold whitespace-nowrap">
+            {groupFilter === 'MY'
+              ? 'Score'
+              : <><span className="sm:hidden">Time</span><span className="hidden sm:inline">{DAY_FMT(activeDate)}</span></>}
           </span>
-          <span className="w-28 sm:w-36 text-[10px] uppercase tracking-wider text-muted font-semibold">Away</span>
+          <span className="flex-1 sm:flex-none sm:w-36 text-[10px] uppercase tracking-wider text-muted font-semibold">Away</span>
           <span className="hidden lg:block flex-1 text-right text-[10px] uppercase tracking-wider text-muted font-semibold">Venue</span>
         </div>
 

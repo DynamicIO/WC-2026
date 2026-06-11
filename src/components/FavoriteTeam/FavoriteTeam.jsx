@@ -55,7 +55,7 @@ function FavModal({ onClose, onSelect, current }) {
   return (
     <div className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-0 sm:p-4">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full sm:max-w-lg rounded-t-2xl sm:rounded-2xl bg-bg-secondary border border-white/10 shadow-2xl p-5">
+      <div className="relative w-full sm:max-w-lg max-h-[90dvh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-bg-secondary border border-white/10 shadow-2xl p-5 safe-area-pb">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="font-display text-2xl font-bold uppercase">Pick your team</h2>

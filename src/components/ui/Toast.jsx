@@ -34,7 +34,7 @@ export function ToastProvider({ children }) {
         role="region"
         aria-live="polite"
         aria-label="Notifications"
-        className="fixed bottom-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"
+        className="fixed inset-x-3 bottom-20 sm:inset-x-auto sm:bottom-5 sm:right-5 z-[9999] flex flex-col gap-2 sm:max-w-sm sm:w-full pointer-events-none safe-area-pb"
       >
         {toasts.map((t) => {
           const Icon = ICONS[t.type] ?? Info

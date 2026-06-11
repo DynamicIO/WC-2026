@@ -220,8 +220,13 @@ export default function Bracket() {
         ))}
       </div>
 
-      {/* Full bracket — horizontally scrollable */}
-      <div className="overflow-x-auto pb-4">
+      {/* Mobile swipe hint */}
+      <p className="md:hidden mb-2 text-center text-[11px] font-semibold uppercase tracking-widest text-muted/60">
+        ← Swipe to explore the bracket →
+      </p>
+
+      {/* Full bracket — horizontally scrollable, edge-to-edge on mobile */}
+      <div className="overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0">
         <div style={{ minWidth: 860 }}>
 
           {/* ── UPPER HALF ─────────────────────────────────────────────── */}

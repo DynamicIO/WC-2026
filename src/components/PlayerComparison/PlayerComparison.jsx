@@ -65,7 +65,7 @@ export default function PlayerComparison({ pairFromSearch }) {
         right={<Badge color="var(--color-live)" bg="rgba(0,217,255,0.12)"><Swords size={12} /> {a.name.split(' ').pop()} v {b.name.split(' ').pop()}</Badge>}
       />
 
-      <Card className="p-5 md:p-7">
+      <Card className="p-4 sm:p-5 md:p-7">
         <div className="grid gap-5 md:grid-cols-2">
           <div className="space-y-3">
             <PlayerHeader player={a} color="#C9A84C" />
@@ -91,7 +91,7 @@ export default function PlayerComparison({ pairFromSearch }) {
         </div>
 
         {/* Radar chart */}
-        <div className="mt-5 h-80">
+        <div className="mt-5 h-64 sm:h-80">
           <ResponsiveContainer width="100%" height="100%">
             <RadarChart data={radarData} outerRadius="75%">
               <PolarGrid stroke="rgba(255,255,255,0.08)" />

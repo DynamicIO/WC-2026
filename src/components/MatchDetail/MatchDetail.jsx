@@ -63,7 +63,7 @@ export default function MatchDetail({ match, onClose }) {
           </button>
         </div>
 
-        <div className="px-5 py-6 space-y-8">
+        <div className="px-4 sm:px-5 py-6 space-y-8 safe-area-pb">
           {/* Score */}
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4">
             <div className="text-center space-y-1">

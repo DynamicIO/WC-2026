@@ -59,11 +59,11 @@ function TeamBoard({ team }) {
   const ai = useClaudeAuto('tactics', { team: team.name, formation: team.formation }, [team.id])
 
   return (
-    <Card lift className="p-5 space-y-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <span className="text-2xl">{team.flag}</span>
-          <h3 className="font-display text-2xl font-bold uppercase">{team.name}</h3>
+    <Card lift className="p-4 sm:p-5 space-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <span className="text-2xl shrink-0">{team.flag}</span>
+          <h3 className="font-display text-xl sm:text-2xl font-bold uppercase truncate">{team.name}</h3>
           <Badge>{team.formation}</Badge>
         </div>
         <button
