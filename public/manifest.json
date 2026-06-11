@@ -1,0 +1,32 @@
+{
+  "name": "WC 2026 Dashboard",
+  "short_name": "WC 2026",
+  "description": "The ultimate FIFA World Cup 2026 fan dashboard — live scores, predictions, standings, bracket and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D1117",
+  "theme_color": "#C9A84C",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["sports", "news"]
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary meta -->
+    <title>WC26 Pulse — FIFA World Cup 2026 Fan Dashboard</title>
+    <meta name="description" content="The ultimate FIFA World Cup 2026 fan dashboard. Live scores, AI match predictions, player comparisons, tactical analysis, and fan sentiment — all in one place." />
+    <meta name="keywords" content="FIFA World Cup 2026, WC 2026, football, soccer, live scores, match predictions, player stats" />
+    <meta name="author" content="WC26 Pulse" />
+    <meta name="theme-color" content="#0D1117" />
+    <link rel="canonical" href="https://wc26pulse.app" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wc26pulse.app" />
+    <meta property="og:title" content="WC26 Pulse — FIFA World Cup 2026 Fan Dashboard" />
+    <meta property="og:description" content="Live scores, AI predictions, player comparisons and fan pulse for the 2026 FIFA World Cup." />
+    <meta property="og:image" content="https://wc26pulse.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="WC26 Pulse" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@wc26pulse" />
+    <meta name="twitter:title" content="WC26 Pulse — FIFA World Cup 2026 Fan Dashboard" />
+    <meta name="twitter:description" content="Live scores, AI predictions, player comparisons and fan pulse for the 2026 FIFA World Cup." />
+    <meta name="twitter:image" content="https://wc26pulse.app/og-image.png" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="WC 2026" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%BD%3C/text%3E%3C/svg%3E" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {})
+        })
+      }
+    </script>
+  </body>
+</html>

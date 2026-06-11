@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #0D1117;
+  --color-bg-secondary: #12192B;
+  --color-bg-card: #1A2236;
+  --color-gold: #C9A84C;
+  --color-live: #00D9FF;
+  --color-ink: #F0F4FF;
+  --color-muted: #7A8FAD;
+  --color-positive: #22C55E;
+  --color-neutral-s: #F59E0B;
+  --color-negative: #EF4444;
+
+  --font-display: "Barlow Condensed", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --radius-card: 12px;
+  --radius-pill: 999px;
+}
+
+/* ── Light mode ─────────────────────────────────────────────────────────── */
+:root[data-theme="light"] {
+  --color-bg-primary:   #F4F6FB;
+  --color-bg-secondary: #EAECF4;
+  --color-bg-card:      #FFFFFF;
+  --color-ink:          #111827;
+  --color-muted:        #6B7280;
+}
+
+:root[data-theme="light"] body {
+  --tw-shadow-color: rgba(0,0,0,0.08);
+}
+
+/* Light mode: give cards visible borders and soft shadows */
+:root[data-theme="light"] [class*="border-white/"] {
+  --tw-border-opacity: 1;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+:root[data-theme="light"] .rounded-2xl,
+:root[data-theme="light"] .rounded-xl,
+:root[data-theme="light"] .rounded-lg {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.05);
+}
+:root[data-theme="light"] .bg-black\/20,
+:root[data-theme="light"] .bg-black\/30,
+:root[data-theme="light"] .bg-black\/40,
+:root[data-theme="light"] .bg-white\/3,
+:root[data-theme="light"] .bg-white\/5 {
+  background-color: rgba(0,0,0,0.04) !important;
+}
+
+/* PWA install banner */
+.pwa-banner {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(201,168,76,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  animation: rise-in 400ms ease-out both;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg-primary);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background 250ms ease, color 150ms ease;
+}
+
+/* Card hover lift */
+.lift {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* Probability bars animate in on mount */
+.prob-bar {
+  transition: width 600ms ease-out;
+}
+
+/* Animated counter pulse for live pill */
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.live-dot {
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+
+/* Section fade/slide on entry */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise-in {
+  animation: rise-in 500ms ease-out both;
+}
+
+/* Subtle scrollbar for carousels */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-card) 25%,
+    color-mix(in srgb, var(--color-bg-card), var(--color-muted) 18%) 50%,
+    var(--color-bg-card) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+/* Focus ring — keyboard nav */
+:focus-visible {
+  outline: 2px solid var(--color-live);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Custom Recharts tooltip */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--color-bg-card) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 10px !important;
+  font-family: var(--font-body) !important;
+  font-size: 12px !important;
+  color: var(--color-ink) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4) !important;
+}
+.recharts-tooltip-label {
+  color: var(--color-muted) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lift, .prob-bar { transition: none; }
+  .live-dot, .rise-in, .skeleton { animation: none; }
+  html { scroll-behavior: auto; }
+}
