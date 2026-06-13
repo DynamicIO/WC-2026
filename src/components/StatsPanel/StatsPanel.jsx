@@ -66,7 +66,7 @@ function Leaderboards() {
         </div>
         {espnLeaders && (
           <span className="text-[10px] text-live font-semibold flex items-center gap-1">
-            <span className="live-dot h-1 w-1 rounded-full bg-live" />Live via ESPN
+            <span className="live-dot h-1 w-1 rounded-full bg-live" />Live · via ESPN
           </span>
         )}
       </div>

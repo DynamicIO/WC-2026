@@ -33,7 +33,6 @@ export const featuredMatches = [
     stage: 'Group A · Match 1',
     odds: { home: 52, draw: 26, away: 22 },
     tagline: 'The opening match of the 2026 World Cup — Mexico and South Africa recreate the iconic opener from the 1986 tournament at the very same ground.',
-    live: true,
   },
   {
     id: 'kor-cze',
@@ -422,31 +421,35 @@ export const tacticalTeams = [
   },
 ]
 
-// ─── Leaderboards ─────────────────────────────────────────────────────────────
-// Reset to 0 — tournament only started today (Jun 11). Will fill via ESPN API.
-// Keeping the structure populated so the UI renders correctly before first match goals.
+// Leaderboards — populated live via ESPN; mock shows top contenders until data arrives.
 
 export const leaderboards = {
   goldenBoot: [
-    { name: 'Kylian Mbappé', team: 'FRA', flag: '🇫🇷', value: 0 },
-    { name: 'Erling Haaland', team: 'NOR', flag: '🇳🇴', value: 0 },
-    { name: 'Vinícius Júnior', team: 'BRA', flag: '🇧🇷', value: 0 },
-    { name: 'Harry Kane', team: 'ENG', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', value: 0 },
-    { name: 'Lionel Messi', team: 'ARG', flag: '🇦🇷', value: 0 },
+    { name: 'Folarin Balogun', team: 'USA', flag: '🇺🇸', value: 2 },
+    { name: 'Julián Quiñones', team: 'MEX', flag: '🇲🇽', value: 1 },
+    { name: 'Raúl Jiménez', team: 'MEX', flag: '🇲🇽', value: 1 },
+    { name: 'Ladislav Krejcí', team: 'CZE', flag: '🇨🇿', value: 1 },
+    { name: 'Hwang In-Beom', team: 'KOR', flag: '🇰🇷', value: 1 },
+    { name: 'Oh Hyeon-Gyu', team: 'KOR', flag: '🇰🇷', value: 1 },
+    { name: 'Jovo Lukic', team: 'BIH', flag: '🇧🇦', value: 1 },
+    { name: 'Cyle Larin', team: 'CAN', flag: '🇨🇦', value: 1 },
   ],
   assists: [
-    { name: 'Jude Bellingham', team: 'ENG', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', value: 0 },
-    { name: 'Pedri', team: 'ESP', flag: '🇪🇸', value: 0 },
-    { name: 'Kylian Mbappé', team: 'FRA', flag: '🇫🇷', value: 0 },
-    { name: 'Jamal Musiala', team: 'GER', flag: '🇩🇪', value: 0 },
-    { name: 'Vinícius Júnior', team: 'BRA', flag: '🇧🇷', value: 0 },
+    { name: 'Hwang In-Beom', team: 'KOR', flag: '🇰🇷', value: 1 },
+    { name: 'Christian Pulisic', team: 'USA', flag: '🇺🇸', value: 1 },
+    { name: 'Érik Lira', team: 'MEX', flag: '🇲🇽', value: 1 },
+    { name: 'Roberto Alvarado', team: 'MEX', flag: '🇲🇽', value: 1 },
+    { name: 'Lee Kang-In', team: 'KOR', flag: '🇰🇷', value: 1 },
+    { name: 'Vladimír Coufal', team: 'CZE', flag: '🇨🇿', value: 1 },
+    { name: 'Sead Kolasinac', team: 'BIH', flag: '🇧🇦', value: 1 },
+    { name: 'Promise David', team: 'CAN', flag: '🇨🇦', value: 1 },
   ],
   cleanSheets: [
+    { name: 'Raúl Rangel', team: 'MEX', flag: '🇲🇽', value: 1 },
     { name: 'Unai Simón', team: 'ESP', flag: '🇪🇸', value: 0 },
     { name: 'Mike Maignan', team: 'FRA', flag: '🇫🇷', value: 0 },
     { name: 'Jordan Pickford', team: 'ENG', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', value: 0 },
     { name: 'Emiliano Martínez', team: 'ARG', flag: '🇦🇷', value: 0 },
-    { name: 'Yassine Bounou', team: 'MAR', flag: '🇲🇦', value: 0 },
   ],
 }
 
@@ -454,16 +457,16 @@ export const leaderboards = {
 // Updated to match the real matchups and correct opening fixtures.
 
 export const fanOpinions = [
-  { id: 1, user: '@aztecaroars', flag: '🇲🇽', sentiment: 'Positive', quote: 'Opening game at the Azteca against South Africa, same as 1986. 40 years later and this stadium still gives me chills.' },
-  { id: 2, user: '@bafana_fan9', flag: '🇿🇦', sentiment: 'Positive', quote: 'Bafana Bafana at a World Cup for the first time in 16 years. Everyone is writing us off. Good. We play better angry.' },
-  { id: 3, user: '@sonsarmy', flag: '🇰🇷', sentiment: 'Positive', quote: 'This could be Son\'s last World Cup. Korea need to make it count against Czechia tonight.' },
-  { id: 4, user: '@threelionsproud', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', sentiment: 'Positive', quote: 'England vs Croatia in Dallas on the 17th. We lost to them in 2018. We won\'t forget. We won\'t let them forget either.' },
-  { id: 5, user: '@canarinho_ny', flag: '🇧🇷', sentiment: 'Positive', quote: 'Brazil vs Morocco at MetLife. 80,000 people in New Jersey for this. The whole stadium will be yellow.' },
-  { id: 6, user: '@stars_stripes', flag: '🇺🇸', sentiment: 'Positive', quote: 'USA vs Paraguay at SoFi in Los Angeles. A home World Cup. This generation was built for exactly this moment.' },
-  { id: 7, user: '@atlasroar', flag: '🇲🇦', sentiment: 'Positive', quote: 'Morocco reached the World Cup semi-final in 2022. 2026 we are going further. This is not a fairy tale, it\'s a continuation.' },
-  { id: 8, user: '@vikingarna', flag: '🇳🇴', sentiment: 'Neutral', quote: 'Group I with France and Senegal. Haaland against the best defences in the world. This is the group of death and we are in it.' },
-  { id: 9, user: '@albiceleste26', flag: '🇦🇷', sentiment: 'Positive', quote: 'Defending champions. Group J with Algeria, Austria, Jordan. We win the group and focus on the knockouts.' },
-  { id: 10, user: '@canada_soccer', flag: '🇨🇦', sentiment: 'Positive', quote: 'Opening at home in Toronto. The whole country is watching. This team has grown up. Time to show it.' },
+  { id: 1, user: '@aztecaroars', flag: '🇲🇽', sentiment: 'Positive', quote: 'MEX 2–0 RSA at the Azteca. Same opener as 1986, same result energy. The whole stadium erupted — this is our tournament.' },
+  { id: 2, user: '@bafana_fan9', flag: '🇿🇦', sentiment: 'Negative', quote: 'Outplayed at the Azteca. We need to regroup fast — Korea next and the group is suddenly very tight.' },
+  { id: 3, user: '@sonsarmy', flag: '🇰🇷', sentiment: 'Positive', quote: 'Son delivered. KOR 2–1 CZE and we sit top of Group A alongside Mexico. Everything to play for on matchday 3.' },
+  { id: 4, user: '@stars_stripes', flag: '🇺🇸', sentiment: 'Positive', quote: 'USA 4–1 PAR at SoFi. Four goals in the home opener — this generation was built for exactly this moment.' },
+  { id: 5, user: '@canada_soccer', flag: '🇨🇦', sentiment: 'Neutral', quote: '1–1 with Bosnia in Toronto. Not the dream start but a point at home keeps us alive in Group B.' },
+  { id: 6, user: '@canarinho_ny', flag: '🇧🇷', sentiment: 'Positive', quote: 'Brazil vs Morocco at MetLife tonight. 80,000 people in New Jersey for this. The whole stadium will be yellow.' },
+  { id: 7, user: '@atlasroar', flag: '🇲🇦', sentiment: 'Positive', quote: 'Morocco reached the World Cup semi-final in 2022. Tonight against Brazil is the statement game of Group C.' },
+  { id: 8, user: '@threelionsproud', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', sentiment: 'Positive', quote: 'England vs Croatia in Dallas on the 17th. We lost to them in 2018. We won\'t forget. We won\'t let them forget either.' },
+  { id: 9, user: '@albiceleste26', flag: '🇦🇷', sentiment: 'Positive', quote: 'Defending champions. Group J kicks off soon — we win the group and focus on the knockouts.' },
+  { id: 10, user: '@vikingarna', flag: '🇳🇴', sentiment: 'Neutral', quote: 'Group I with France and Senegal. Haaland against the best defences in the world. This is the group of death and we are in it.' },
 ]
 
 // ─── Live Ticker (fallback — replaced by ESPN API when available) ─────────────

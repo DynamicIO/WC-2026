@@ -109,7 +109,7 @@ export default function Standings() {
 
           <p className="mt-3 text-[11px] text-muted text-center">
             <span className="inline-block h-2 w-2 rounded-sm bg-positive/30 mr-1.5" />
-            Green rows qualify for the round of 32. Data via ESPN · auto-refreshes every 5 min.
+            Green rows qualify for the round of 32. Standings computed from live results · auto-refreshes every 5 min.
           </p>
         </>
       )}

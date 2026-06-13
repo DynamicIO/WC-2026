@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Gauge, ListChecks, Share2, Check } from 'lucide-react'
 import { predictions } from '../../data/mockData'
+import { useAllResults } from '../../hooks/useFootballData'
 import { useClaudeAuto } from '../../hooks/useClaude'
 import { Card, Badge, SectionHeader, AiNote, EmptyState } from '../ui'
 
@@ -58,13 +59,14 @@ function SharePick({ match }) {
   )
 }
 
-function PredictionCard({ match }) {
+function PredictionCard({ match, result }) {
   const [animate, setAnimate] = useState(false)
   useEffect(() => {
     const t = requestAnimationFrame(() => setAnimate(true))
     return () => cancelAnimationFrame(t)
   }, [])
 
+  const finished = result?.finished
   const favorite = match.probs.home >= match.probs.away ? match.home.name : match.away.name
   const ai = useClaudeAuto('prediction', { home: favorite, away: favorite === match.home.name ? match.away.name : match.home.name }, [match.id])
 
@@ -74,13 +76,22 @@ function PredictionCard({ match }) {
         <div className="flex items-center gap-2.5">
           <span className="text-2xl">{match.home.flag}</span>
           <span className="font-display text-xl font-bold uppercase">{match.home.code}</span>
-          <span className="text-muted text-sm">v</span>
+          {finished ? (
+            <span className="font-display text-xl font-bold">
+              <span className="text-gold">{result.homeScore}</span>
+              <span className="text-muted mx-1">–</span>
+              <span className="text-live">{result.awayScore}</span>
+            </span>
+          ) : (
+            <span className="text-muted text-sm">v</span>
+          )}
           <span className="font-display text-xl font-bold uppercase">{match.away.code}</span>
           <span className="text-2xl">{match.away.flag}</span>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           <Badge>{match.stage}</Badge>
-          <SharePick match={match} />
+          {finished && <Badge color="var(--color-muted)" bg="rgba(122,143,173,0.12)">Full time</Badge>}
+          {!finished && <SharePick match={match} />}
         </div>
       </div>
 
@@ -127,16 +138,40 @@ const sortedPredictions = [...predictions].sort((a, b) => {
 })
 
 export default function PredictionsHub() {
+  const results = useAllResults()
+  const today = new Date().toISOString().slice(0, 10)
+
+  const visible = useMemo(() => {
+    const upcoming = sortedPredictions.filter((m) => {
+      const key = `${m.home.code}_${m.away.code}`.toUpperCase()
+      return !results[key]?.finished
+    })
+    const recent = sortedPredictions.filter((m) => {
+      const key = `${m.home.code}_${m.away.code}`.toUpperCase()
+      return results[key]?.finished
+    })
+    return [...upcoming, ...recent].slice(0, 6)
+  }, [results])
+
   return (
     <section id="predictions" className="rise-in">
-      <SectionHeader kicker="AI Predictions" title="Match Predictions" />
-      {sortedPredictions.length === 0 ? (
+      <SectionHeader
+        kicker="AI Predictions"
+        title="Match Predictions"
+        right={
+          <span className="text-[11px] text-muted">
+            Updated {today}
+          </span>
+        }
+      />
+      {visible.length === 0 ? (
         <EmptyState title="No upcoming matches" description="Predictions will appear 24 hours before kick-off." />
       ) : (
         <div className="space-y-5">
-          {sortedPredictions.slice(0, 4).map((m) => (
-            <PredictionCard key={m.id} match={m} />
-          ))}
+          {visible.map((m) => {
+            const key = `${m.home.code}_${m.away.code}`.toUpperCase()
+            return <PredictionCard key={m.id} match={m} result={results[key]} />
+          })}
         </div>
       )}
     </section>

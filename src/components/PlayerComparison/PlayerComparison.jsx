@@ -128,7 +128,7 @@ export default function PlayerComparison({ pairFromSearch }) {
               })}
             </tbody>
           </table>
-          <p className="mt-1.5 text-[10px] text-muted/50">All tournament stats currently 0 — first match today (Jun 11). Data updates live via ESPN.</p>
+          <p className="mt-1.5 text-[11px] text-muted/50">Tournament stats update live via ESPN as matches are played.</p>
         </div>
 
         <div className="mt-5">
