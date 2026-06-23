@@ -11,9 +11,11 @@ import { GROUP_MATCHES, ALL_TEAMS } from '../data/scheduleData'
 import { featuredMatches, predictions } from '../data/mockData'
 
 const BASE = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world'
+// Standings must use /apis/v2/ — the /site/v2/ path returns {} for soccer
+const STANDINGS_URL = 'https://site.api.espn.com/apis/v2/sports/soccer/fifa.world/standings'
 const TOURNAMENT_START = '2026-06-11'
-const LIVE_INTERVAL = 30_000
-const IDLE_INTERVAL = 300_000
+const LIVE_INTERVAL = 30_000   // 30 s — polls while any match is in-play
+const IDLE_INTERVAL = 300_000  // 5 min — polls between matches
 
 // ─── Editorial lookup (odds, taglines) keyed by HOME_AWAY ─────────────────────
 
@@ -391,25 +393,44 @@ function parseEspnLeaders(data) {
   return parsed
 }
 
+function parseEntry(e) {
+  // /apis/v2/ stats array uses shortDisplayName or name as key
+  const stat = (name, ...aliases) => {
+    const found = e.stats?.find((s) => [name, ...aliases].includes(s.name) || [name, ...aliases].includes(s.shortDisplayName))
+    return found?.value ?? found?.displayValue ?? 0
+  }
+  return {
+    team: e.team?.displayName ?? e.team?.name ?? '—',
+    flag: FLAG_BY_CODE[e.team?.abbreviation] || e.team?.flag || '',
+    abbr: e.team?.abbreviation || '',
+    stats: {
+      P:   Number(stat('gamesPlayed', 'GP')),
+      W:   Number(stat('wins', 'W')),
+      D:   Number(stat('ties', 'D', 'draws')),
+      L:   Number(stat('losses', 'L')),
+      GF:  Number(stat('pointsFor', 'GF')),
+      GA:  Number(stat('pointsAgainst', 'GA')),
+      GD:  Number(stat('pointDifferential', 'GD')),
+      Pts: Number(stat('points', 'Pts', 'PTS')),
+    },
+  }
+}
+
 function transformEspnStandings(data) {
-  return (data.standings ?? []).map((group) => ({
-    group: group.name,
-    entries: (group.entries ?? []).map((e) => ({
-      team: e.team?.displayName ?? e.team?.name ?? '—',
-      flag: e.team?.flag || '',
-      abbr: e.team?.abbreviation || '',
-      stats: {
-        P: e.stats?.find((s) => s.name === 'gamesPlayed')?.value ?? 0,
-        W: e.stats?.find((s) => s.name === 'wins')?.value ?? 0,
-        D: e.stats?.find((s) => s.name === 'ties')?.value ?? 0,
-        L: e.stats?.find((s) => s.name === 'losses')?.value ?? 0,
-        GF: e.stats?.find((s) => s.name === 'pointsFor')?.value ?? 0,
-        GA: e.stats?.find((s) => s.name === 'pointsAgainst')?.value ?? 0,
-        GD: e.stats?.find((s) => s.name === 'pointDifferential')?.value ?? 0,
-        Pts: e.stats?.find((s) => s.name === 'points')?.value ?? 0,
-      },
-    })),
-  }))
+  // /apis/v2/ wraps groups under data.children[].standings.entries
+  // /apis/site/v2/ (fallback) uses data.standings[].entries
+  const groups = data.children ?? data.standings ?? []
+  return groups
+    .map((group) => {
+      const name = group.name ?? group.abbreviation ?? ''
+      const rawEntries = group.standings?.entries ?? group.entries ?? []
+      if (!rawEntries.length) return null
+      return {
+        group: name.startsWith('Group') ? name : `Group ${name}`,
+        entries: rawEntries.map(parseEntry),
+      }
+    })
+    .filter(Boolean)
 }
 
 // ─── Shared data fetch (used by multiple hooks) ───────────────────────────────
@@ -472,7 +493,7 @@ export function useStandings() {
 
   const fetch_ = useCallback(() => {
     Promise.all([
-      safeFetch(`${BASE}/standings`).catch(() => ({ standings: [] })),
+      safeFetch(STANDINGS_URL).catch(() => ({ standings: [] })),
       loadTournamentData(),
     ])
       .then(([espnData, { results }]) => {

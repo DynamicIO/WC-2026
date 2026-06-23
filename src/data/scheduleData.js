@@ -58,7 +58,7 @@ const TEAMS = {
   PAN: T('PAN', 'Panama', '🇵🇦'),
 }
 
-const m = (id, h, a, group, venue, date, time) => ({
+const m = (id, h, a, group, venue, date, time, hs = null, as = null) => ({
   id,
   home: TEAMS[h],
   away: TEAMS[a],
@@ -66,79 +66,79 @@ const m = (id, h, a, group, venue, date, time) => ({
   venue,
   date,
   time,
-  homeScore: null,
-  awayScore: null,
-  status: 'upcoming',
+  homeScore: hs,
+  awayScore: as,
+  status: hs !== null ? 'finished' : 'upcoming',
 })
 
 export const GROUP_MATCHES = [
   // ── June 11 ───────────────────────────────────────────────────────────────
-  m('m01', 'MEX', 'RSA', 'A', 'Mexico City Stadium', '2026-06-11', '3:00 PM ET'),
-  m('m02', 'KOR', 'CZE', 'A', 'Estadio Guadalajara, Zapopan', '2026-06-11', '10:00 PM ET'),
+  m('m01', 'MEX', 'RSA', 'A', 'Mexico City Stadium', '2026-06-11', '3:00 PM ET', 2, 0),
+  m('m02', 'KOR', 'CZE', 'A', 'Estadio Guadalajara, Zapopan', '2026-06-11', '10:00 PM ET', 2, 1),
 
   // ── June 12 ───────────────────────────────────────────────────────────────
-  m('m03', 'CAN', 'BIH', 'B', 'Toronto Stadium', '2026-06-12', '3:00 PM ET'),
-  m('m04', 'USA', 'PAR', 'D', 'Los Angeles Stadium', '2026-06-12', '9:00 PM ET'),
+  m('m03', 'CAN', 'BIH', 'B', 'Toronto Stadium', '2026-06-12', '3:00 PM ET', 1, 1),
+  m('m04', 'USA', 'PAR', 'D', 'Los Angeles Stadium', '2026-06-12', '9:00 PM ET', 4, 1),
 
   // ── June 13 ───────────────────────────────────────────────────────────────
-  m('m05', 'QAT', 'SUI', 'B', 'San Francisco Bay Area Stadium', '2026-06-13', '3:00 PM ET'),
-  m('m06', 'BRA', 'MAR', 'C', 'New York New Jersey Stadium', '2026-06-13', '6:00 PM ET'),
-  m('m07', 'HAI', 'SCO', 'C', 'Boston Stadium', '2026-06-13', '9:00 PM ET'),
-  m('m08', 'AUS', 'TUR', 'D', 'BC Place, Vancouver', '2026-06-13', '9:00 PM ET'),
+  m('m05', 'QAT', 'SUI', 'B', 'San Francisco Bay Area Stadium', '2026-06-13', '3:00 PM ET', 1, 1),
+  m('m06', 'BRA', 'MAR', 'C', 'New York New Jersey Stadium', '2026-06-13', '6:00 PM ET', 1, 1),
+  m('m07', 'HAI', 'SCO', 'C', 'Boston Stadium', '2026-06-13', '9:00 PM ET', 0, 1),
+  m('m08', 'AUS', 'TUR', 'D', 'BC Place, Vancouver', '2026-06-13', '9:00 PM ET', 2, 0),
 
   // ── June 14 ───────────────────────────────────────────────────────────────
-  m('m09', 'GER', 'CUW', 'E', 'Houston Stadium', '2026-06-14', '1:00 PM ET'),
-  m('m10', 'NED', 'JPN', 'F', 'Dallas Stadium', '2026-06-14', '4:00 PM ET'),
-  m('m11', 'CIV', 'ECU', 'E', 'Philadelphia Stadium', '2026-06-14', '7:00 PM ET'),
-  m('m12', 'SWE', 'TUN', 'F', 'Estadio Monterrey', '2026-06-14', '9:00 PM ET'),
+  m('m09', 'GER', 'CUW', 'E', 'Houston Stadium', '2026-06-14', '1:00 PM ET', 7, 1),
+  m('m10', 'NED', 'JPN', 'F', 'Dallas Stadium', '2026-06-14', '4:00 PM ET', 2, 2),
+  m('m11', 'CIV', 'ECU', 'E', 'Philadelphia Stadium', '2026-06-14', '7:00 PM ET', 1, 0),
+  m('m12', 'SWE', 'TUN', 'F', 'Estadio Monterrey', '2026-06-14', '9:00 PM ET', 5, 1),
 
   // ── June 15 ───────────────────────────────────────────────────────────────
-  m('m13', 'ESP', 'CPV', 'H', 'Atlanta Stadium', '2026-06-15', '12:00 PM ET'),
-  m('m14', 'BEL', 'EGY', 'G', 'BC Place, Vancouver', '2026-06-15', '3:00 PM ET'),
-  m('m15', 'KSA', 'URU', 'H', 'Miami Stadium', '2026-06-15', '6:00 PM ET'),
-  m('m16', 'IRN', 'NZL', 'G', 'Los Angeles Stadium', '2026-06-15', '9:00 PM ET'),
+  m('m13', 'ESP', 'CPV', 'H', 'Atlanta Stadium', '2026-06-15', '12:00 PM ET', 0, 0),
+  m('m14', 'BEL', 'EGY', 'G', 'BC Place, Vancouver', '2026-06-15', '3:00 PM ET', 1, 1),
+  m('m15', 'KSA', 'URU', 'H', 'Miami Stadium', '2026-06-15', '6:00 PM ET', 1, 1),
+  m('m16', 'IRN', 'NZL', 'G', 'Los Angeles Stadium', '2026-06-15', '9:00 PM ET', 2, 2),
 
   // ── June 16 ───────────────────────────────────────────────────────────────
-  m('m17', 'FRA', 'SEN', 'I', 'New York New Jersey Stadium', '2026-06-16', '3:00 PM ET'),
-  m('m18', 'IRQ', 'NOR', 'I', 'Boston Stadium', '2026-06-16', '6:00 PM ET'),
-  m('m19', 'ARG', 'ALG', 'J', 'Kansas City Stadium', '2026-06-16', '9:00 PM ET'),
-  m('m20', 'AUT', 'JOR', 'J', 'San Francisco Bay Area Stadium', '2026-06-17', '12:00 AM ET'),
+  m('m17', 'FRA', 'SEN', 'I', 'New York New Jersey Stadium', '2026-06-16', '3:00 PM ET', 3, 1),
+  m('m18', 'IRQ', 'NOR', 'I', 'Boston Stadium', '2026-06-16', '6:00 PM ET', 1, 4),
+  m('m19', 'ARG', 'ALG', 'J', 'Kansas City Stadium', '2026-06-16', '9:00 PM ET', 3, 0),
+  m('m20', 'AUT', 'JOR', 'J', 'San Francisco Bay Area Stadium', '2026-06-17', '12:00 AM ET', 3, 1),
 
   // ── June 17 ───────────────────────────────────────────────────────────────
-  m('m21', 'POR', 'COD', 'K', 'Houston Stadium', '2026-06-17', '1:00 PM ET'),
-  m('m22', 'ENG', 'CRO', 'L', 'Dallas Stadium', '2026-06-17', '4:00 PM ET'),
-  m('m23', 'GHA', 'PAN', 'L', 'Toronto Stadium', '2026-06-17', '7:00 PM ET'),
-  m('m24', 'UZB', 'COL', 'K', 'Mexico City Stadium', '2026-06-17', '9:00 PM ET'),
+  m('m21', 'POR', 'COD', 'K', 'Houston Stadium', '2026-06-17', '1:00 PM ET', 1, 1),
+  m('m22', 'ENG', 'CRO', 'L', 'Dallas Stadium', '2026-06-17', '4:00 PM ET', 4, 2),
+  m('m23', 'GHA', 'PAN', 'L', 'Toronto Stadium', '2026-06-17', '7:00 PM ET', 1, 0),
+  m('m24', 'UZB', 'COL', 'K', 'Mexico City Stadium', '2026-06-17', '9:00 PM ET', 1, 3),
 
   // ── June 18 ───────────────────────────────────────────────────────────────
-  m('m25', 'CZE', 'RSA', 'A', 'Atlanta Stadium', '2026-06-18', '12:00 PM ET'),
-  m('m26', 'SUI', 'BIH', 'B', 'Los Angeles Stadium', '2026-06-18', '3:00 PM ET'),
-  m('m27', 'CAN', 'QAT', 'B', 'BC Place, Vancouver', '2026-06-18', '6:00 PM ET'),
-  m('m28', 'MEX', 'KOR', 'A', 'Estadio Guadalajara, Zapopan', '2026-06-18', '9:00 PM ET'),
+  m('m25', 'CZE', 'RSA', 'A', 'Atlanta Stadium', '2026-06-18', '12:00 PM ET', 1, 1),
+  m('m26', 'SUI', 'BIH', 'B', 'Los Angeles Stadium', '2026-06-18', '3:00 PM ET', 4, 1),
+  m('m27', 'CAN', 'QAT', 'B', 'BC Place, Vancouver', '2026-06-18', '6:00 PM ET', 6, 0),
+  m('m28', 'MEX', 'KOR', 'A', 'Estadio Guadalajara, Zapopan', '2026-06-18', '9:00 PM ET', 1, 0),
 
   // ── June 19 ───────────────────────────────────────────────────────────────
-  m('m29', 'USA', 'AUS', 'D', 'Seattle Stadium', '2026-06-19', '3:00 PM ET'),
-  m('m30', 'SCO', 'MAR', 'C', 'Boston Stadium', '2026-06-19', '6:00 PM ET'),
-  m('m31', 'BRA', 'HAI', 'C', 'Philadelphia Stadium', '2026-06-19', '8:30 PM ET'),
-  m('m32', 'TUR', 'PAR', 'D', 'San Francisco Bay Area Stadium', '2026-06-20', '12:00 AM ET'),
+  m('m29', 'USA', 'AUS', 'D', 'Seattle Stadium', '2026-06-19', '3:00 PM ET', 2, 0),
+  m('m30', 'SCO', 'MAR', 'C', 'Boston Stadium', '2026-06-19', '6:00 PM ET', 0, 1),
+  m('m31', 'BRA', 'HAI', 'C', 'Philadelphia Stadium', '2026-06-19', '8:30 PM ET', 3, 0),
+  m('m32', 'TUR', 'PAR', 'D', 'San Francisco Bay Area Stadium', '2026-06-20', '12:00 AM ET', 0, 1),
 
   // ── June 20 ───────────────────────────────────────────────────────────────
-  m('m33', 'NED', 'SWE', 'F', 'Houston Stadium', '2026-06-20', '1:00 PM ET'),
-  m('m34', 'GER', 'CIV', 'E', 'Toronto Stadium', '2026-06-20', '4:00 PM ET'),
-  m('m35', 'ECU', 'CUW', 'E', 'Kansas City Stadium', '2026-06-20', '8:00 PM ET'),
-  m('m36', 'TUN', 'JPN', 'F', 'Estadio Monterrey', '2026-06-21', '12:00 AM ET'),
+  m('m33', 'NED', 'SWE', 'F', 'Houston Stadium', '2026-06-20', '1:00 PM ET', 5, 1),
+  m('m34', 'GER', 'CIV', 'E', 'Toronto Stadium', '2026-06-20', '4:00 PM ET', 2, 1),
+  m('m35', 'ECU', 'CUW', 'E', 'Kansas City Stadium', '2026-06-20', '8:00 PM ET', 0, 0),
+  m('m36', 'TUN', 'JPN', 'F', 'Estadio Monterrey', '2026-06-21', '12:00 AM ET', 0, 4),
 
   // ── June 21 ───────────────────────────────────────────────────────────────
-  m('m37', 'ESP', 'KSA', 'H', 'Atlanta Stadium', '2026-06-21', '12:00 PM ET'),
-  m('m38', 'BEL', 'IRN', 'G', 'Los Angeles Stadium', '2026-06-21', '3:00 PM ET'),
-  m('m39', 'URU', 'CPV', 'H', 'Miami Stadium', '2026-06-21', '6:00 PM ET'),
-  m('m40', 'NZL', 'EGY', 'G', 'BC Place, Vancouver', '2026-06-21', '9:00 PM ET'),
+  m('m37', 'ESP', 'KSA', 'H', 'Atlanta Stadium', '2026-06-21', '12:00 PM ET', 4, 0),
+  m('m38', 'BEL', 'IRN', 'G', 'Los Angeles Stadium', '2026-06-21', '3:00 PM ET', 0, 0),
+  m('m39', 'URU', 'CPV', 'H', 'Miami Stadium', '2026-06-21', '6:00 PM ET', 2, 2),
+  m('m40', 'NZL', 'EGY', 'G', 'BC Place, Vancouver', '2026-06-21', '9:00 PM ET', 1, 3),
 
   // ── June 22 ───────────────────────────────────────────────────────────────
-  m('m41', 'ARG', 'AUT', 'J', 'Dallas Stadium', '2026-06-22', '1:00 PM ET'),
-  m('m42', 'FRA', 'IRQ', 'I', 'Philadelphia Stadium', '2026-06-22', '5:00 PM ET'),
-  m('m43', 'NOR', 'SEN', 'I', 'New York New Jersey Stadium', '2026-06-22', '8:00 PM ET'),
-  m('m44', 'JOR', 'ALG', 'J', 'San Francisco Bay Area Stadium', '2026-06-22', '11:00 PM ET'),
+  m('m41', 'ARG', 'AUT', 'J', 'Dallas Stadium', '2026-06-22', '1:00 PM ET', 2, 0),
+  m('m42', 'FRA', 'IRQ', 'I', 'Philadelphia Stadium', '2026-06-22', '5:00 PM ET', 3, 0),
+  m('m43', 'NOR', 'SEN', 'I', 'New York New Jersey Stadium', '2026-06-22', '8:00 PM ET', 3, 2),
+  m('m44', 'JOR', 'ALG', 'J', 'San Francisco Bay Area Stadium', '2026-06-22', '11:00 PM ET', 1, 2),
 
   // ── June 23 ───────────────────────────────────────────────────────────────
   m('m45', 'POR', 'UZB', 'K', 'Houston Stadium', '2026-06-23', '1:00 PM ET'),
